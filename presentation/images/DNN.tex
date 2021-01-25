@@ -1,0 +1,206 @@
+\documentclass[tikz,border=3mm]{standalone}
+
+\usepackage{amsmath}
+
+\usetikzlibrary{matrix,positioning,fit,backgrounds,intersections}
+\usetikzlibrary{calc}
+
+
+\begin{document}
+\def\layersep{1.5cm}
+%\begin{minipage}{0.6\columnwidth}
+    \begin{tikzpicture}[draw=black!50, mmat/.style={matrix of math nodes,column sep=-\pgflinewidth/2,
+       row sep=-\pgflinewidth/2,cells={nodes={draw,inner sep=5pt,ultra thin, scale=0.85}},draw=#1,thick,inner sep=0pt},
+       mmat/.default=black,
+       node distance=0.3em,
+       transform shape,scale=0.8]
+
+
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,fill=black!25,minimum size=15pt,inner sep=0pt]
+    \tikzstyle{input neuron}=[neuron, fill=red!50];
+    \tikzstyle{output neuron}=[neuron, fill=green!50];
+    \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+    \tikzstyle{annot} = [text width=4em, text centered]
+
+
+	% Draw the input layer nodes
+	\foreach \name / \y in {1,...,5}
+	% This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+		\node[input neuron, draw=black!100, thick, pin=left:{\scriptsize In{[}\#\y{]}}] (I-\name) at (-3.0*\layersep,\y) {};
+
+    % \node[fit=(mat4-5-1)(mat4-5-1),inner sep=0pt,draw,green,thick,name path=fit3](f3){};
+    % \node[right=of mat4-1-1, label={\scriptsize DNN}] (DNN1) {$\longrightarrow$};
+    % \node[right=of mat4-2-1] (DNN2) {$\longrightarrow$};
+    % \node[right=of mat4-3-1] (DNN3) {$\longrightarrow$};
+    % \node[right=of mat4-4-1] (DNN4) {$\longrightarrow$};
+    % \node[right=of mat4-5-1] (DNN5) {$\longrightarrow$};
+
+
+
+
+
+    % \node[input neuron, draw=black!100, thick, right=of DNN1] (I-1){};
+    % \node[input neuron, draw=black!100, thick, right=of DNN2] (I-2){};
+    % \node[input neuron, draw=black!100, thick, right=of DNN3] (I-3){};
+    % \node[input neuron, draw=black!100, thick, right=of DNN4] (I-4){};
+    % \node[input neuron, draw=black!100, thick, right=of DNN5] (I-5){};
+
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of I-1] (H-3){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of I-2] (H-4){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of I-3] (H-5){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of I-4] (H-6){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of I-5] (H-7){};
+    \node[hidden neuron, draw=black!100, thick] (H-2) at ($ (H-4) !2.0! (H-3) $) {};%above=5pt of H-3] (H-2){};
+    \node[hidden neuron, draw=black!100, thick] (H-1) at ($ (H-3) !2.0! (H-2) $) {};%above=5pt of H-2] (H-1){};
+    \node[hidden neuron, draw=black!100, thick] (H-8) at ($ (H-6) !2.0! (H-7) $) {};%below=5pt of H-7] (H-8){};
+    \node[hidden neuron, draw=black!100, thick] (H-9) at ($ (H-7) !2.0! (H-8) $) {};%below=5pt of H-8] (H-9){};
+
+	\node[hidden neuron, draw=black!100, thick, right=\layersep of H-1] (HH-1){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of H-2] (HH-2){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of H-3] (HH-3){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of H-4] (HH-4){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of H-5] (HH-5){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of H-6] (HH-6){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of H-7] (HH-7){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of H-8] (HH-8){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of H-9] (HH-9){\(\sigma\)};
+
+	\node[hidden neuron, draw=black!100, thick, right=\layersep of HH-1] (HHH-1){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HH-2] (HHH-2){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HH-3] (HHH-3){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HH-4] (HHH-4){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HH-5] (HHH-5){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HH-6] (HHH-6){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HH-7] (HHH-7){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HH-8] (HHH-8){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HH-9] (HHH-9){};
+
+	\node[hidden neuron, draw=black!100, thick, right=\layersep of HHH-1] (HHHH-1){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHH-2] (HHHH-2){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHH-3] (HHHH-3){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHH-4] (HHHH-4){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHH-5] (HHHH-5){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHH-6] (HHHH-6){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHH-7] (HHHH-7){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHH-8] (HHHH-8){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHH-9] (HHHH-9){\(\sigma\)};
+
+	\node[hidden neuron, draw=black!100, thick, right=\layersep of HHHH-1] (HHHHH-1){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHH-2] (HHHHH-2){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHH-3] (HHHHH-3){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHH-4] (HHHHH-4){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHH-5] (HHHHH-5){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHH-6] (HHHHH-6){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHH-7] (HHHHH-7){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHH-8] (HHHHH-8){};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHH-9] (HHHHH-9){};
+
+	\node[hidden neuron, draw=black!100, thick, right=\layersep of HHHHH-1] (HHHHHH-1){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHHH-2] (HHHHHH-2){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHHH-3] (HHHHHH-3){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHHH-4] (HHHHHH-4){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHHH-5] (HHHHHH-5){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHHH-6] (HHHHHH-6){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHHH-7] (HHHHHH-7){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHHH-8] (HHHHHH-8){\(\sigma\)};
+    \node[hidden neuron, draw=black!100, thick, right=\layersep of HHHHH-9] (HHHHHH-9){\(\sigma\)};
+
+    \node[output neuron, draw=black!100, thick, pin={[pin edge={->}]right:{\scriptsize Out{[}\#2{]}}}, right=\layersep of HHHHHH-5] (O-2){};
+    \node[output neuron, draw=black!100, thick, pin={[pin edge={->}]right:{\scriptsize Out{[}\#3{]}}}, right=\layersep of HHHHHH-6] (O-3){};
+    \node[output neuron, draw=black!100, thick, pin={[pin edge={->}]right:{\scriptsize Out{[}\#1{]}}}, right=\layersep of HHHHHH-4] (O-1){};
+
+    \foreach \source in {1,...,5}
+        \foreach \dest in {1,...,9}
+            \path (I-\source) edge (H-\dest);
+
+	\foreach \source in {1,...,9}
+	    \foreach \dest in {1,...,9}
+	        \path (H-\source) edge (HH-\dest);
+
+	\foreach \source in {1,...,9}
+	    \foreach \dest in {1,...,9}
+	        \path (HH-\source) edge (HHH-\dest);
+
+	\foreach \source in {1,...,9}
+	    \foreach \dest in {1,...,9}
+	        \path (HHH-\source) edge (HHHH-\dest);
+
+	\foreach \source in {1,...,9}
+	    \foreach \dest in {1,...,9}
+	        \path (HHHH-\source) edge (HHHHH-\dest);
+
+	\foreach \source in {1,...,9}
+	    \foreach \dest in {1,...,9}
+	        \path (HHHHH-\source) edge (HHHHHH-\dest);
+
+    \foreach \source in {1,...,9}
+        \path (HHHHHH-\source) edge (O-1);
+    \foreach \source in {1,...,9}
+        \path (HHHHHH-\source) edge (O-2);
+    \foreach \source in {1,...,9}
+        \path (HHHHHH-\source) edge (O-3);
+
+
+	% Annotate the layers
+	\node[annot,below of=I-1,      node distance=3.0cm] (A-IL)        {\footnotesize\textbf{Input\\Layer}};
+	\node[annot,below of=H-3,      node distance=3.0cm] (A-HL)        {\footnotesize\textbf{Hidden\\Layer\\1}};
+	\node[annot,below of=HH-3,     node distance=3.0cm] (A-HHL)       {\footnotesize\textbf{Activation\\1}};
+	\node[annot,below of=HHH-3,    node distance=3.0cm] (A-HHHL)      {\footnotesize\textbf{Hidden\\Layer\\2}};
+	\node[annot,below of=HHHH-3,   node distance=3.0cm] (A-HHHHL)     {\footnotesize\textbf{Activation\\2}};
+	\node[annot,below of=HHHHH-3,  node distance=3.0cm] (A-HHHHHL)    {\footnotesize\textbf{Hidden\\Layer\\3}};
+	\node[annot,below of=HHHHHH-3, node distance=3.0cm] (A-HHHHHHL)   {\footnotesize\textbf{Activation\\3}};
+	\node[annot,below of=O-3,      node distance=6.0cm] (A-OL)        {\footnotesize\textbf{Output\\Layer}};
+	%\node[annot,below of=HHHHH-3, node distance=3.0cm] (A-HHHHHL)    {\textbf{Hidden\\layer 3}};
+	% \node[annot,above of=H-5, node distance=1.0cm] (ahl) {Hidden layer};
+	% \node[annot,above of=S2-5, node distance=1.0cm] (as2) {Sigmoid};
+	% \node[annot,right of=as2] {Output layer};
+
+	% \node[annot,below of=S1-1, node distance=1.0cm] (bs1) {\textbf{25} weights\\\textbf{5} biases};
+	% \node[annot,below of=H-1, node distance=1.0cm] (bhl) {\textbf{25} weights\\\textbf{5} biases};
+	% \node[annot,below of=S2-1, node distance=1.0cm] (bs2) {\textbf{25} weights\\\textbf{5} biases};
+	% \node[annot,right of=bs2] {\textbf{5} weights\\\textbf{1} bias};
+
+
+
+
+
+    % \foreach \Anchor in {south west,north west,south east,north east}
+    % {\path[name path=test] (f1.\Anchor) -- (mat2.\Anchor);
+    % \draw[blue,densely dotted,name intersections={of=test and fit,total=\t}]
+    % \ifnum\t>0 (intersection-\t) -- (mat2.\Anchor) \else
+    %  (f1.\Anchor) -- (mat2.\Anchor)\fi;
+%
+    % \path[name path=test2]  (4.\Anchor) -- (mat2.\Anchor);
+    % \draw[green,densely dotted,name intersections={of=test2 and mat2,total=\tt}]
+    % \ifnum\tt>0 (intersection-1) -- (4.\Anchor) \else
+    %    (mat2.\Anchor) --  (4.\Anchor)\fi;
+%
+    % \path[name path=test3] (f2.\Anchor) -- (mat4.\Anchor);
+    % \draw[blue,densely dotted,name intersections={of=test3 and fit2,total=\t}]
+    % \ifnum\t>0 (intersection-\t) -- (2.\Anchor) \else
+    %  (f2.\Anchor) -- (2.\Anchor)\fi;
+    %    }
+%
+    % \path (mat3-10-1.south east) node[anchor=south west,blue,scale=0.75,inner sep=2.2pt]{max};
+    % \path (mat1.south) node[below] {$\mathbf{I}$}
+    %  (mat2|-mat1.south) node[below] {$\mathbf{W}$}
+    %  (mat3|-mat1.south) node[below] {$\mathbf{I}*\mathbf{W}$}
+    %  (mat4|-mat1.south) node[below] {\textbf{Pooling}}
+    %  (H-5|-mat1.south) node[below] {\textbf{DNN}};
+
+    % \begin{scope}[on background layer]
+    %     \fill[red!20] (f1.north west) rectangle (f1.south east);
+    % \end{scope}
+    % \begin{scope}[on background layer]
+    %     \fill[red!20] (f2.north west) rectangle (f2.south east);
+    % \end{scope}
+    % \begin{scope}[on background layer]
+    %     \fill[green!20] (ntc.north west) rectangle (ntc.south east);
+    % \end{scope}
+    % \begin{scope}[on background layer]
+    %     \fill[green!20] (2.north west) rectangle (2.south east);
+    % \end{scope}
+\end{tikzpicture}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

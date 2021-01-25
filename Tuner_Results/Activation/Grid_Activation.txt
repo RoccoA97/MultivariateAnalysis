@@ -1,0 +1,14 @@
+  act_dense    act_final  Mean_acc
+1       relu      sigmoid 0.8396875
+2        elu      sigmoid 0.8393750
+3       selu      sigmoid 0.8381250
+4     linear      sigmoid 0.8137500
+5       relu      softmax 0.5000000
+6        elu      softmax 0.5000000
+7       selu      softmax 0.5000000
+8     linear      softmax 0.5000000
+9       relu hard_sigmoid 0.8400000
+10       elu hard_sigmoid 0.8362500
+11      selu hard_sigmoid 0.8337500
+12    linear hard_sigmoid 0.8103125
+

@@ -1,0 +1,7 @@
+ loss  Mean_acc
+1         binary_crossentropy 0.8453125
+2                     poisson 0.8353125
+3 kullback_leibler_divergence 0.5000000
+4                       hinge 0.8331250
+5          mean_squared_error 0.8428125
+6         mean_absolute_error 0.8228125
