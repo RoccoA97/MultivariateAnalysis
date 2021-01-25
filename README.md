@@ -39,6 +39,6 @@ The repository is organized as follows:
 * **`references`**: some references useful to understand the fundamentals of this study;
 * **`Tuner_Results`**: the results from tuning of every hyperparameter;
 * **`Models`**: files containing the parameters for every model tested in the tuning;
-* **`presentation`**: folder containing a notebook for the final presentation in both html and notebook formats.
+* **`presentation`**: folder containing a notebook for the final presentation in both html and ipynb notebook formats.
 
-In particular, the final presentation can be found [**here**](https://github.com/RoccoA97/VHDL_IPBUS_filter/blob/master/report/main/main.pdf)
+In particular, the final presentation can be found [**here**](https://github.com/RoccoA97/MultivariateAnalysis/blob/main/presentation/presentation.ipynb), in ipynb notebook format, and [**here**](https://github.com/RoccoA97/MultivariateAnalysis/blob/main/presentation/presentation.html), in html format.
